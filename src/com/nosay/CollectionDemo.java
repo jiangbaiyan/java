@@ -3,7 +3,9 @@ package src.com.nosay;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
+/**
+ * Collection: 无序 重复
+ */
 public class CollectionDemo {
 
     public static void main(String[] args) {
