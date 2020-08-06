@@ -1,4 +1,4 @@
-package src.com.nosay;
+package JavaSE.src.com.nosay.demo;
 
 public class IntegerDemo {
     public static void main(String[] args) {

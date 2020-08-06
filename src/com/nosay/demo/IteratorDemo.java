@@ -1,4 +1,4 @@
-package JavaSE.src.com.nosay;
+package JavaSE.src.com.nosay.demo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,7 +10,7 @@ public class IteratorDemo {
         ArrayList list = new ArrayList();
         list.add(1);
         list.add(2);
-        list.add(3);
+        list.add("abc");
         list.add(4);
         // 迭代器循环
         Iterator iterator = list.iterator();

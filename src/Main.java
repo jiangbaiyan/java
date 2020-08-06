@@ -1,11 +1,12 @@
 package src;
 
-import src.com.nosay.EventEnum;
+import JavaSE.src.com.nosay.util.FanxingClass;
 
 public class Main {
 
     public static void main(String[] args) {
-        EventEnum ee = EventEnum.LAUNCH;
-        ee.show();
+        FanxingClass<String> fxc = new FanxingClass<>("jby", "12");
+        fxc.show(123);
+        System.out.println(fxc.age);
     }
 }

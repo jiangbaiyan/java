@@ -1,4 +1,4 @@
-package src.com.nosay;
+package JavaSE.src.com.nosay.demo;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
