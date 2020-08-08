@@ -1,6 +1,6 @@
 package src;
 
-import JavaSE.src.com.nosay.util.FanxingClass;
+import src.com.nosay.javase.demo.util.FanxingClass;
 
 public class Main {
 

@@ -1,7 +1,6 @@
-package JavaSE.src.com.nosay.demo;
+package src.com.nosay.javase.demo;
 
-import JavaSE.src.com.nosay.util.Person;
-
+import src.com.nosay.javase.demo.util.Person;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.TreeSet;

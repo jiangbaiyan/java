@@ -1,4 +1,4 @@
-package JavaSE.src.com.nosay.util;
+package src.com.nosay.javase.demo.util;
 
 public class Person implements Comparable {
 

@@ -1,4 +1,4 @@
-package JavaSE.src.com.nosay.demo;
+package src.com.nosay.javase.demo;
 
 public enum EventEnum {
 

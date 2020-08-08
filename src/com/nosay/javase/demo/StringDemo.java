@@ -1,4 +1,4 @@
-package JavaSE.src.com.nosay.demo;
+package src.com.nosay.javase.demo;
 
 /**
  * 常量池在1.7之后移到了堆空间中
