@@ -1,4 +1,4 @@
-package src.com.nosay.javase.test;
+package src.com.nosay.javase.thread.test;
 
 /**
  * 代理人

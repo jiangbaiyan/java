@@ -1,4 +1,4 @@
-package src.com.nosay.javase.test;
+package src.com.nosay.javase.thread.test;
 
 // 线程同步
 public class TicketRunnable2 implements Runnable {

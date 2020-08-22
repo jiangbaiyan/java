@@ -1,4 +1,4 @@
-package src.com.nosay.javase.pc2;
+package src.com.nosay.javase.thread.pc2;
 
 import java.util.concurrent.BlockingQueue;
 

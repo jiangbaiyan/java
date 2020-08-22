@@ -1,4 +1,4 @@
-package src.com.nosay.javase.test;
+package src.com.nosay.javase.demo;
 
 import java.io.*;
 

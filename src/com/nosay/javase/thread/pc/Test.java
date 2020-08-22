@@ -1,4 +1,4 @@
-package src.com.nosay.javase.pc;
+package src.com.nosay.javase.thread.pc;
 
 public class Test {
 
