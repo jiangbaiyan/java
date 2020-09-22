@@ -5,12 +5,15 @@ import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class SelectorThread implements Runnable {
     // 每个线程对应一个selector，多线程情况下该主机，该程序的并发客户端被分配到多个selector上
     // 每个客户端只绑定到其中一个selector
 
     Selector selector = null;
+
+    LinkedBlockingQueue<Channel> lbq = new LinkedBlockingQueue<>();
 
     SelectorThread() {
         try {
@@ -45,7 +48,19 @@ public class SelectorThread implements Runnable {
                     }
                 }
                 // 3.处理一些task
-            } catch (IOException e) {
+                // 被打断之后注册，带着新注册的socket返回继续select()
+                if (!lbq.isEmpty()) {
+                    Channel c = lbq.take();
+                    if (c instanceof ServerSocketChannel) {
+                        ServerSocketChannel server = (ServerSocketChannel)c;
+                        server.register(selector, SelectionKey.OP_ACCEPT);
+                    } else if (c instanceof SocketChannel) {
+                        SocketChannel client = (SocketChannel)c;
+                        ByteBuffer buffer = ByteBuffer.allocateDirect(4096);
+                        client.register(selector, SelectionKey.OP_READ, buffer);
+                    }
+                }
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
         }

@@ -38,7 +38,21 @@ public class SelectorThreadGroup {
 
     private void nextSelector(Channel c) {
         SelectorThread st = next();
-        // 重点：c有可能是server，也有可能是client，需要强转
+
+        // 1.通过队列传递消息
+        st.lbq.add(c);
+        // 2.通过打断阻塞，让对应的线程去自己完成注册selector（即线程内第3步的task）
+        st.selector.wakeup();
+
+        // 重点：c有可能是server，也有可能是client，需要强转。下面的代码是错误的
+//        ServerSocketChannel s = (ServerSocketChannel)c;
+//        try {
+//            // 下边这两个语句执行有坑，是因为多线程语句执行顺序的不确定性，所以必须依赖线程通信机制
+//            s.register(st.selector, SelectionKey.OP_ACCEPT); // 有可能他执行的快，wakeup还没来得及执行，一直阻塞
+//            st.selector.wakeup(); // 需要线程通信（相当于go里面的channel）
+//        } catch (ClosedChannelException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
