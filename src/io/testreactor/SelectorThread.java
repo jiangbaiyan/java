@@ -15,8 +15,11 @@ public class SelectorThread implements Runnable {
 
     LinkedBlockingQueue<Channel> lbq = new LinkedBlockingQueue<>();
 
-    SelectorThread() {
+    SelectorThreadGroup stg;
+
+    SelectorThread(SelectorThreadGroup stg) {
         try {
+            this.stg = stg;
             selector = Selector.open();
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,6 +102,7 @@ public class SelectorThread implements Runnable {
             SocketChannel client = server.accept();
             client.configureBlocking(false);
             // TODO: choose a selector and register
+            stg.nextSelectorV2(client);
         } catch (IOException e) {
             e.printStackTrace();
         }
