@@ -1,6 +1,6 @@
 package src.algorithm.code01;
 
-public class BubbleSort {
+public class C02_BubbleSort {
 
     public static void bubbleSort(int[] arr) {
         if (arr == null || arr.length <= 1) {

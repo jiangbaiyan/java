@@ -1,6 +1,6 @@
 package src.algorithm.code01;
 
-public class InsertSort {
+public class C03_InsertSort {
 
     public static void insertSort(int[] arr) {
         if (arr == null || arr.length < 2) {

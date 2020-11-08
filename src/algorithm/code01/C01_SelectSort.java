@@ -1,6 +1,6 @@
 package src.algorithm.code01;
 
-public class SelectSort {
+public class C01_SelectSort {
 
     public static void selectSort(int[] arr) {
         if (arr == null || arr.length <= 1) {
