@@ -6,8 +6,8 @@ public class C02_BubbleSort {
         if (arr == null || arr.length <= 1) {
             return;
         }
-        // 0 ~ N - 1
-        // 0 ~ N - 2
+        // 0 ~ N - 1 第N-1个数排好序
+        // 0 ~ N - 2 第N-2个数排好序
         for (int i = arr.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (arr[j] > arr[j + 1]) {

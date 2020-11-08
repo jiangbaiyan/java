@@ -10,7 +10,7 @@ public class C06_BsNearRight {
         }
         int L = 0;
         int R = arr.length - 1;
-        int index = -1;
+        int index = -1; // 重要，用一个变量去记录位置
         int mid;
         while (L <= R) {
             mid = L + ((R - L) >> 1);
