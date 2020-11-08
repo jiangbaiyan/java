@@ -16,7 +16,7 @@ public class SelectorThreadGroup {
         // num 线程数
         sts = new SelectorThread[num];
         for (int i = 0; i < num; i++) {
-            sts[i] = new SelectorThread();
+            sts[i] = new SelectorThread(this);
             // 开启线程，刚开启就阻塞在select()处
             new Thread(sts[i]).start();
         }
@@ -36,7 +36,7 @@ public class SelectorThreadGroup {
         }
     }
 
-    private void nextSelector(Channel c) {
+    public void nextSelector(Channel c) {
         SelectorThread st = next();
 
         // 1.通过队列传递消息
@@ -56,9 +56,35 @@ public class SelectorThreadGroup {
 
     }
 
+    public void nextSelectorV2(Channel c) {
+        // server只分配给第0个selector
+        if (c instanceof ServerSocketChannel) {
+            try {
+                sts[0].lbq.put(c);
+                sts[0].selector.wakeup();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            SelectorThread st = nextV2();
+            try {
+                st.lbq.put(c);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            st.selector.wakeup();
+        }
+    }
+
     // 选择一个selector。无论是serverSocket还是socket都复用这个方法
     private SelectorThread next() {
         int index = xid.incrementAndGet() % sts.length;
         return sts[index];
+    }
+
+    // 选择一个selector。无论是serverSocket还是socket都复用这个方法
+    private SelectorThread nextV2() {
+        int index = xid.incrementAndGet() % (sts.length - 1);
+        return sts[index + 1];
     }
 }
