@@ -19,6 +19,31 @@ public class Code01_MergeSort {
         process(arr, mid + 1, R);
     }
 
+    // 非递归实现
+    public static void mergeSort2(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int N = arr.length;
+        int mergeSize = 1;
+        while (mergeSize < N) {
+            int L = 0;
+            while (L < N) {
+                // 确定中点
+                int M = L + mergeSize - 1;
+                // 右组不够了, 直接break
+                if (M >= N) {
+                    break;
+                }
+                // 右组够, 找到右组边界. 受数组长度N影响, 右组可能没法到达mergeSize这个步长的边界
+                int R = Math.max(N - 1, M + mergeSize);
+                merge(arr, L, M, R);
+                L = R + 1; // 继续下一个
+            }
+            mergeSize <<= 1;
+        }
+    }
+
     public static void merge(int[] arr, int L, int M, int R) {
         int[] help = new int[R - L + 1];
         int p1 = L; // 左组起点

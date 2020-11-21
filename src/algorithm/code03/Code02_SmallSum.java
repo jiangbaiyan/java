@@ -16,7 +16,6 @@ public class Code02_SmallSum {
             return 0;
         }
         int mid = L + ((R - L) >> 1);
-
         return process(arr, L, mid) + process(arr, mid + 1, R) + merge(arr, L, mid, R);
     }
 
@@ -28,7 +27,7 @@ public class Code02_SmallSum {
         int res = 0;
         while (p1 <= M && p2 <= R) {
             res += arr[p1] < arr[p2] ? arr[p1] * (R - p2 + 1) : 0; // 拷贝左组的时候产生小和, 小和的数量是R - p2 + 1个小和
-            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++]; // 小于拷贝左组. 相等或大于先拷贝右组
         }
         while (p1 <= M) {
             help[i++] = arr[p1++];
@@ -36,7 +35,7 @@ public class Code02_SmallSum {
         while (p2 <= R) {
             help[i++] = arr[p2++];
         }
-        for (i = 0; i < arr.length; i++) {
+        for (i = 0; i < help.length; i++) {
             arr[L + i] = help[i];
         }
         return res;

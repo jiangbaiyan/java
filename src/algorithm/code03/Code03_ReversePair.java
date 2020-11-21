@@ -3,6 +3,7 @@ package src.algorithm.code03;
 // 逆序对问题. 比如[4, 1, 3, 1], 0位置上有(4,1)(4,3)(4,1)三个逆序对...以此类推, 找出一共有几个逆序对
 public class Code03_ReversePair {
 
+    // 其实就相当于找当前位置的数在右边有几个数比他大, 和Code02中正好相反
     public static int reversePair(int[] arr) {
         if (arr == null || arr.length < 2) {
             return 0;
@@ -26,7 +27,8 @@ public class Code03_ReversePair {
         int res = 0;
         while (p1 >= L && p2 >= M + 1) {
             res += arr[p1] > arr[p2] ? (p2 - M) : 0;
-            help[i--] = arr[p1] > arr[p2] ? arr[p1--] : arr[p2--];
+            help[i--] = arr[p1] > arr[p2] ? arr[p1--] : arr[p2--]; // 只有严格大于的时候才拷贝左组, 其他(包括等于)全拷贝右组
+            // 因为只有等于时候拷贝右组, 才能知道左组比右组大的数有几个. 因为右组的相等的数不止一个, 必须要找到右组相等数的左边界才能求和
         }
         while (p1 >= L) {
             help[i--] = arr[p1--];
