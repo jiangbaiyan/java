@@ -38,7 +38,7 @@ public class Code01_MergeSort {
         }
         // 拷贝回原数组
         for (i = 0; i < help.length; i++) {
-            arr[L + i] = help[i];
+            arr[L + i] = help[i]; // 一定是L + i, 不是i!
         }
     }
 }
