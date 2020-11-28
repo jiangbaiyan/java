@@ -1,6 +1,6 @@
 package src.algorithm.code04;
 
-public class QuickSort {
+public class Code01_QuickSort {
 
     // 快排1.0
     public static void quickSortV1(int[] arr) {
