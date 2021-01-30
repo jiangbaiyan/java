@@ -36,6 +36,12 @@ public class TankFrame extends Frame {
    class MyKeyListener extends KeyAdapter {
 
        public void keyPressed(KeyEvent e) {
+           int key = e.getKeyCode();
+           switch (key) {
+               case KeyEvent.VK_LEFT:
+
+                   break;
+           }
            x += 200;
            //repaint();
        }
