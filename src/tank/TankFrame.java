@@ -10,45 +10,75 @@ public class TankFrame extends Frame {
 
     int x = 200, y = 200;
 
-   public TankFrame() {
-       setSize(800, 600);
-       setResizable(false);
-       setTitle("tank war");
-       setVisible(true);
+    public TankFrame() {
+        setSize(800, 600);
+        setResizable(false);
+        setTitle("tank war");
+        setVisible(true);
 
-       addKeyListener(new MyKeyListener());
+        addKeyListener(new MyKeyListener());
 
-       addWindowListener(new WindowAdapter() {
-           @Override
-           public void windowClosing(WindowEvent e) {
-               System.exit(0);
-           }
-       });
-   }
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+    }
 
-   @Override
-   public void paint(Graphics g) {
-       g.fillRect(x, y, 50, 50);
-       x += 10;
-   }
+    @Override
+    public void paint(Graphics g) {
+        g.fillRect(x, y, 50, 50);
+        //x += 10;
+    }
 
 
-   class MyKeyListener extends KeyAdapter {
+    class MyKeyListener extends KeyAdapter {
 
-       public void keyPressed(KeyEvent e) {
-           int key = e.getKeyCode();
-           switch (key) {
-               case KeyEvent.VK_LEFT:
+        boolean bL = false;
+        boolean bU = false;
+        boolean bR = false;
+        boolean bD = false;
 
-                   break;
-           }
-           x += 200;
-           //repaint();
-       }
+        public void keyPressed(KeyEvent e) {
+            int key = e.getKeyCode();
+            switch (key) {
+                case KeyEvent.VK_LEFT:
+                    bL = true;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = true;
+                    break;
+                default:
+                    break;
+            }
+        }
 
-       public void keyReleased(KeyEvent e) {
-           System.out.println("key released");
-       }
+        public void keyReleased(KeyEvent e) {
+            int key = e.getKeyCode();
+            switch (key) {
+                case KeyEvent.VK_LEFT:
+                    bL = false;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = false;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = false;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = false;
+                    break;
+                default:
+                    break;
+            }
+        }
 
-   }
+    }
 }
