@@ -3,6 +3,8 @@ package src.tank;
 import java.awt.*;
 
 public class Bullet {
+
+    private TankFrame tf;
     public static final int SPEED = 10;
 
     public static int WIDTH = 5, HEIGHT = 5;
@@ -11,13 +13,19 @@ public class Bullet {
 
     public Dir dir;
 
-    public Bullet(int x, int y, Dir dir) {
+    private boolean live = true;
+
+    public Bullet(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public void paint(Graphics g) {
+        if (!live) {
+            tf.bullets.remove(this);
+        }
         Color c = g.getColor();
         g.setColor(Color.RED);
         g.fillOval(x, y, WIDTH, HEIGHT);
@@ -40,6 +48,11 @@ public class Bullet {
                 y += SPEED;
                 break;
         }
+
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
+            live = false;
+        }
+
     }
 
 }

@@ -5,11 +5,14 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
-    Bullet b = new Bullet(300, 300, Dir.DOWN);
+    List<Bullet> bullets = new ArrayList<>();
+    Bullet b = new Bullet(300, 300, Dir.DOWN, this);
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
     public TankFrame() {
@@ -45,8 +48,13 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
+        // 画tank
         myTank.paint(g);
-        b.paint(g);
+        // 画子弹
+        // 如果用迭代器的迭代，无法在迭代过程中删除元素
+        for(int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).paint(g);
+        }
     }
 
 
