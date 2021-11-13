@@ -2,7 +2,9 @@ package com.imooc.controller;
 
 import com.imooc.enums.YesOrNo;
 import com.imooc.pojo.Carousel;
+import com.imooc.pojo.Category;
 import com.imooc.service.CarouselService;
+import com.imooc.service.CategoryService;
 import com.imooc.utils.IMOOCJSONResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,6 +23,9 @@ public class IndexController {
     @Autowired
     private CarouselService carouselService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @ApiOperation(value = "获取首页轮播图列表", notes = "获取首页轮播图列表", httpMethod = "GET")
     @GetMapping("/carousel")
     public IMOOCJSONResult carousel() {
@@ -29,4 +34,10 @@ public class IndexController {
     }
 
     // 首页分类展示: 第一次刷新查询所有大分类. 如果鼠标上移到大分类再加载子分类的内容(懒加载)
+    @ApiOperation(value = "获取商品分类(一级分类)", notes = "获取商品分类(一级分类)", httpMethod = "GET")
+    @GetMapping("/cats")
+    public IMOOCJSONResult cats() {
+        List<Category> list = categoryService.queryAllRootLevelCat();
+        return IMOOCJSONResult.ok(list);
+    }
 }
