@@ -26,4 +26,16 @@ public class ShopcatController {
         // TODO 前端用户在登录的情况下,添加商品到购物车,会同时在后端同步购物车到redis
         return IMOOCJSONResult.ok();
     }
+
+    @ApiOperation(value = "添加商品到购物车", notes = "添加商品到购物车", httpMethod = "POST")
+    @PostMapping("/add")
+    public IMOOCJSONResult add(@RequestParam String userId, @RequestParam String itemSpecId, HttpServletRequest req, HttpServletResponse rsp) {
+
+        if (StringUtils.isBlank(userId) ||  (StringUtils.isBlank(itemSpecId))) {
+            return IMOOCJSONResult.errorMsg("");
+        }
+
+        // TODO 用户已经登录，需要同步删除后端购物车中的商品
+        return IMOOCJSONResult.ok();
+    }
 }
