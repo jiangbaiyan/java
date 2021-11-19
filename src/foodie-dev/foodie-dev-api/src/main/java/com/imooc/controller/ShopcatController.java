@@ -28,8 +28,8 @@ public class ShopcatController {
     }
 
     @ApiOperation(value = "添加商品到购物车", notes = "添加商品到购物车", httpMethod = "POST")
-    @PostMapping("/add")
-    public IMOOCJSONResult add(@RequestParam String userId, @RequestParam String itemSpecId, HttpServletRequest req, HttpServletResponse rsp) {
+    @PostMapping("/del")
+    public IMOOCJSONResult del(@RequestParam String userId, @RequestParam String itemSpecId, HttpServletRequest req, HttpServletResponse rsp) {
 
         if (StringUtils.isBlank(userId) ||  (StringUtils.isBlank(itemSpecId))) {
             return IMOOCJSONResult.errorMsg("");
