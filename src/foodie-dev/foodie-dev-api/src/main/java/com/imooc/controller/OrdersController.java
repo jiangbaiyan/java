@@ -4,6 +4,7 @@ import com.imooc.enums.PayMethod;
 import com.imooc.pojo.bo.SubmitOrderBO;
 import com.imooc.service.CarouselService;
 import com.imooc.service.CategoryService;
+import com.imooc.service.OrderService;
 import com.imooc.utils.IMOOCJSONResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,13 +19,10 @@ import java.util.List;
 public class OrdersController {
 
     @Autowired
-    private CarouselService carouselService;
-
-    @Autowired
-    private CategoryService categoryService;
+    private OrderService orderService;
 
     @ApiOperation(value = "用户下单", notes = "用户下单", httpMethod = "POST")
-    @GetMapping("/create")
+    @PostMapping("/create")
     public IMOOCJSONResult create(@RequestBody SubmitOrderBO submitOrderBO) {
 
         System.out.println(submitOrderBO.toString());
@@ -34,6 +32,7 @@ public class OrdersController {
         }
 
         // 1. 创建订单
+        orderService.createOrder(submitOrderBO);
 
         // 2. 创建订单后移除购物车中已结算的商品
 
