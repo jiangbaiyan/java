@@ -39,4 +39,10 @@ public interface ItemService {
     // 根据规格ids查询最新的购物车商品数据
     public List<ShopcartVO> queryItemsBySpecIds(String specIds);
 
+    // 根据规格id查询规格详情
+    public ItemsSpec queryItemSpecById(String specId);
+
+    // 根据商品id获取商品主图url
+    public String queryItemMainImgById(String itemId);
+
 }
