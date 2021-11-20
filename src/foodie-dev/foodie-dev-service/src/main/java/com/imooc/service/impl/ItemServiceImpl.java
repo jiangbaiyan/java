@@ -181,5 +181,14 @@ public class ItemServiceImpl implements ItemService {
         return result != null ? result.getUrl() : "";
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void decreaseItemSpecStock(String specId, int buyCounts) {
+        int result = itemsMapperCustom.decreaseItemSpecStock(specId, buyCounts);
+        if (result != 1) {
+            throw new RuntimeException("订单创建失败, 原因：库存不足");
+        }
+    }
+
 
 }

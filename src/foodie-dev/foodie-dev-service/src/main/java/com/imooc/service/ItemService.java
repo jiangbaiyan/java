@@ -45,4 +45,7 @@ public interface ItemService {
     // 根据商品id获取商品主图url
     public String queryItemMainImgById(String itemId);
 
+    // 减少库存
+    public void decreaseItemSpecStock(String specId, int buyCounts);
+
 }
