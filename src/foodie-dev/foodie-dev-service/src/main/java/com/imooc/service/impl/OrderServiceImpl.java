@@ -144,4 +144,9 @@ public class OrderServiceImpl implements OrderService {
         paidStatus.setPayTime(new Date());
         orderStatusMapper.updateByPrimaryKey(paidStatus);
     }
+
+    @Override
+    public OrderStatus queryOrderStatusInfo(String orderId) {
+        return orderStatusMapper.selectByPrimaryKey(orderId);
+    }
 }
