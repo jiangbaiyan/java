@@ -39,7 +39,7 @@ public class CenterUserController extends BaseController {
     private FileUpload fileUpload;
 
     @ApiOperation(value = "修改用户头像", notes = "修改用户头像", httpMethod ="POST")
-    @GetMapping("update")
+    @GetMapping("uploadFace")
     public IMOOCJSONResult uploadFace(@RequestParam String userId, MultipartFile file, HttpServletRequest req, HttpServletResponse rsp) {
         // 头像保存的地址
         String fileSpace = fileUpload.getImageUserFaceLocation();
