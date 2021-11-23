@@ -6,6 +6,7 @@ import com.imooc.pojo.bo.center.CenterUserBO;
 import com.imooc.resource.FileUpload;
 import com.imooc.service.center.CenterUserService;
 import com.imooc.utils.CookieUtils;
+import com.imooc.utils.DateUtil;
 import com.imooc.utils.IMOOCJSONResult;
 import com.imooc.utils.JsonUtils;
 import io.swagger.annotations.Api;
@@ -55,6 +56,7 @@ public class CenterUserController extends BaseController {
         String suffix = fileNameArr[fileNameArr.length - 1];
         String newFileName = "face-" + userId + "." + suffix;
         String finalFacePath = fileSpace + uploadPathPrefix + File.separator + newFileName;
+        uploadPathPrefix += ("/"+ newFileName);
         // 创建目录
         File outFile = new File(finalFacePath);
         if (outFile.getParentFile() != null) {
@@ -78,6 +80,11 @@ public class CenterUserController extends BaseController {
                 }
             }
         }
+
+        String serverUrl = fileUpload.getImageServerUrl();
+        // 浏览器可能有缓存，需要加上时间戳保证图片及时刷新
+        Users userResult = centerUserService.updateUserFace(userId, serverUrl + uploadPathPrefix + "?t=" + DateUtil.getCurrentDateString(DateUtil.DATE_PATTERN));
+        userResult = setNullProperty(userResult);
         return IMOOCJSONResult.ok();
     }
 
