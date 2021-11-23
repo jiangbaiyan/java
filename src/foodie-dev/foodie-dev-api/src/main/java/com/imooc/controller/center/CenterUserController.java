@@ -3,13 +3,13 @@ package com.imooc.controller.center;
 import com.imooc.controller.BaseController;
 import com.imooc.pojo.Users;
 import com.imooc.pojo.bo.center.CenterUserBO;
+import com.imooc.resource.FileUpload;
 import com.imooc.service.center.CenterUserService;
 import com.imooc.utils.CookieUtils;
 import com.imooc.utils.IMOOCJSONResult;
 import com.imooc.utils.JsonUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +34,14 @@ public class CenterUserController extends BaseController {
     @Autowired
     private CenterUserService centerUserService;
 
+    @Autowired
+    private FileUpload fileUpload;
+
     @ApiOperation(value = "修改用户头像", notes = "修改用户头像", httpMethod ="POST")
     @GetMapping("update")
     public IMOOCJSONResult uploadFace(@RequestParam String userId, MultipartFile file, HttpServletRequest req, HttpServletResponse rsp) {
         // 头像保存的地址
-        String fileSpace = IMAGE_USER_FACE_LOCATION;
+        String fileSpace = fileUpload.getImageUserFaceLocation();
         String uploadPathPrefix = File.separator + userId;
         if (file == null) {
             return IMOOCJSONResult.errorMsg("文件不能为空");
