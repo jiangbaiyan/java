@@ -53,7 +53,11 @@ public class CenterUserController extends BaseController {
         }
         // 文件重命名 imooc-face.png -> ["imocc-face", "png"]
         String[] fileNameArr = fileName.split("\\.");
+        // 后缀名
         String suffix = fileNameArr[fileNameArr.length - 1];
+        if (!suffix.equals("png") && !suffix.equals("jpg") && !suffix.equals("jpeg")) {
+            return IMOOCJSONResult.errorMsg("格式不正确");
+        }
         String newFileName = "face-" + userId + "." + suffix;
         String finalFacePath = fileSpace + uploadPathPrefix + File.separator + newFileName;
         uploadPathPrefix += ("/"+ newFileName);
